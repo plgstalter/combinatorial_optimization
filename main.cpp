@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "Graph.h"
+#include "Random_graph.h"
 
 template <typename T>
 void vector_debug(std::vector<T> vec) {
@@ -21,7 +22,6 @@ void vector_printer(std::vector<int> vec) {
 }
 
 int main(int argc, char const *argv[]) { 
-	int m = 1;
 	std::vector< std::vector<int> > nodes = {
 		{1, 2},
 		{0, 4},
@@ -38,10 +38,12 @@ int main(int argc, char const *argv[]) {
 	};
 	Graph Instance(nodes, weights);
 	if ( argc < 2) {
-		Instance.Dijkstra(m);
+		Instance.Dijkstra(1);
 	} else {
 		Instance.Dijkstra(atoi(argv[1]));
 	}
 	vector_printer(Instance.predecessors);
+	Random_graph random_graphs(12);
+	std::cout <<  size(random_graphs.generated_graphs) << std::endl;
  return 0;
  }
