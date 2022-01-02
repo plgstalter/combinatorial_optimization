@@ -9,4 +9,4 @@ main.o: main.cpp Graph.h Random_graph.h
 
 Graph.o: Graph.h
 
-Random_graph.o: Random_graph.h
+Random_graph.o: Random_graph.h Graph.h
