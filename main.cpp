@@ -45,6 +45,9 @@ int main(int argc, char const *argv[]) {
 	vector_printer(Instance.predecessors);
 	Random_graph random_graphs(12);
 	random_graphs.generate_graphs();
-	std::cout <<  size(random_graphs.generated_graphs) << std::endl;
+	std::cout << random_graphs.generated_graphs[0] << std::endl;
+	std::cout <<  "--- --- ---"<< std::endl;
+	std::vector<int> rand_test = random_graphs.test_random();
+	vector_printer(rand_test);
  return 0;
  }

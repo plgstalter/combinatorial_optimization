@@ -10,6 +10,7 @@ class Random_graph {
 
 		Random_graph(int number);
 		void generate_graphs();
+		std::vector<int> test_random();
 };
 
 Random_graph::Random_graph(int number) {
@@ -26,4 +27,15 @@ void Random_graph::generate_graphs() {
 		//tmp_graph.weights = ?;
 		generated_graphs[i] = &tmp_graph;
 	}
+}
+
+std::vector<int> Random_graph::test_random() {
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> distribution(1,50);
+	auto dice = std::bind ( distribution, generator );
+	std::vector<int> rand_vec;
+	for (int i=0; i<10; i++) {
+		rand_vec.push_back(dice());
+	}
+	return rand_vec;
 }

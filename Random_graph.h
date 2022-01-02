@@ -12,4 +12,5 @@ class Random_graph {
 
 		Random_graph(int number);
 		void generate_graphs();
+		std::vector<int> test_random();
 };
