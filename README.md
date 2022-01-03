@@ -14,6 +14,6 @@ To compute `n` graphs of `m` nodes, type:
 
 	python random_graphs.py n m | tr '[' '{' | tr ']' '}' > graphs.txt
 
-The graphs will be stored in the file `graphs.txt` in such a form that is easily readable by `c++` code.
+The graphs will be stored in the file `graphs.txt` in such a form that is easily readable by `C++` code.
 
 __Remark:__ The pipes after the python call require a Unix system. On Windows, find another way to change the '[]' into '{}'.
