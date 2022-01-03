@@ -17,3 +17,9 @@ To compute `n` graphs of `m` nodes, type:
 The graphs will be stored in the file `graphs.txt` in such a form that is easily readable by `C++` code.
 
 __Remark:__ The pipes after the python call require a Unix system. On Windows, find another way to change the '[]' into '{}'.
+
+Here is an example of graph generator use:
+
+![timing python](ressources/capture.png)
+
+So generating 100 graphs of 400 nodes (and 96K edges) took me 20s. Since Dijkstra will be longer to run, it's no big deal to use `Python` here.
