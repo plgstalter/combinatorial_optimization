@@ -1,2 +1,5 @@
 *.o
 main
+prog
+__pycache__*
+*.swp
