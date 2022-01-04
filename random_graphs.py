@@ -1,30 +1,40 @@
 import numpy as np
 from sys import argv
 
-def random_graph(number_of_graphs, size_nodes, density=.3):
+def random_graph(number_of_graphs, size_nodes, density=.3, max_weight=500):
 
     res = []
-    choice_array = np.arange(size_nodes**2)
+    bis_size = np.floor(density * size_nodes **2)
+    arcs_array = np.arange(size_nodes**2)
+    weights = np.floor(max_weight * np.random.rand(number_of_graphs * int(bis_size))).astype(int).reshape(number_of_graphs, (int(bis_size)))
+    
     for i in range(number_of_graphs):
-        np.random.shuffle(choice_array)
-        arcs = choice_array[:int(np.floor(density * size_nodes**2))]
+        np.random.shuffle(arcs_array)
+        arcs = arcs_array[:int(np.floor(density * size_nodes**2))]
         res.append(arcs)
-    return res
+    return [res, weights]
 
-def decode_graph(Arcs, size_nodes):
+def decode_graph(Arcs, Weights, size_nodes):
     '''
     put graph in proper arcs form
     '''
-    for arcs in Arcs:
-        start = arcs//size_nodes
-        end = arcs%size_nodes
-        print('{')
+    for j in range(len(Arcs)):
+        start = Arcs[j]//size_nodes
+        end = Arcs[j]%size_nodes
+        print('arcs={')
         for i in range(size_nodes):
             print(start[(end == i) & (start != end)], end=',')
             print()
         print('}')
         print()
+        print('weights={')
+        for i in range(size_nodes):
+            print(Weights[j][(end == i) & (start != end)], end=',')
+            print()
+        print('}')
+        print()
+        print()
 
 if  len(argv) > 2:
-    Arcs = random_graph(int(argv[1]), int(argv[2]))
-    decode_graph(Arcs, int(argv[2]))
+    Arcs, Weights = random_graph(int(argv[1]), int(argv[2]))
+    decode_graph(Arcs, Weights, int(argv[2]))
