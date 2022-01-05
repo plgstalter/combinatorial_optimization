@@ -1,9 +1,7 @@
 #include <iostream>
 #include <vector>
-#include <fstream>
 
 #include "Graph.h"
-#include "Random_graph.h"
 #include "test_graphs.hpp"
 
 template <typename T>
@@ -24,9 +22,13 @@ void vector_printer(std::vector<int> vec) {
 }
 
 int main(int argc, char const *argv[]) { 
-	test_graphs teste;
-	Graph instance(teste.arcs0, teste.weights0);
-	instance.Dijkstra(1);
-	vector_printer(instance.predecessors);
+	if (argc > 2) {
+		test_graphs teste;
+		Graph test_graph(teste.arcs1, teste.weights1);
+		test_graph.Dijkstra(2);
+			//std::cerr << "Please indicate a number smaller than the amount of graphs.\n Same for the starting vertex.\n";
+	} else {
+		std::cerr << "Please which graph you want to run Dijkstra on, and the starting vertex.\n";
+	};
 	return 0;
 }
