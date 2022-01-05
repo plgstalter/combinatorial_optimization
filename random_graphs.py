@@ -19,8 +19,6 @@ def decode_graph(Arcs, Weights, size_nodes, number_of_graphs):
     put graph in proper arcs form
     '''
     print('#include <vector>\n\nclass test_graphs {\npublic:')
-    print(f"std::vector< std::vector<int> >* arcs@{number_of_graphs}%;")
-    print(f"std::vector< std::vector<int> >* weights@{number_of_graphs}%;\n")
     for j in range(len(Arcs)):
         start = Arcs[j]//size_nodes
         end = Arcs[j]%size_nodes
@@ -28,12 +26,18 @@ def decode_graph(Arcs, Weights, size_nodes, number_of_graphs):
         for i in range(size_nodes):
             print(list(start[(end == i) & (start != end)]), end=',\n')
         print('};')
-        print(f"arcs@{j}% = &arcs{j};\n")
         print(f"std::vector< std::vector<int> > weights{j}=",end='{\n')
         for i in range(size_nodes):
             print(list(Weights[j][(end == i) & (start != end)]), end=',\n')
         print('};')
-        print(f"weights@{j}% = &weights{j};\n")
+    print(f"std::vector< std::vector<int> >* arcs@{number_of_graphs}%=",end="{\n")
+    for i in range(len(Arcs)):
+        print(f"&arcs{i},")
+    print('};')
+    print(f"std::vector< std::vector<int> >* weights@{number_of_graphs}%=",end="{\n")
+    for i in range(len(Arcs)):
+        print(f"&weights{i},")
+    print('};')
     print("};")
 
 if  len(argv) > 2:
