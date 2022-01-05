@@ -29,6 +29,9 @@ Graph::Graph(std::vector< std::vector<int> > Nodes, std::vector< std::vector<int
 }
 
 void Graph::Dijkstra(int start) {
+	if (start > size_nodes) {
+		std::cerr << "The start node must be part of the graph.\n";
+	}
 	distances[start] = 0;
 	predecessors[start] = -1;
 	while (std::accumulate(P.begin(), P.end(), 0) != 0) {
