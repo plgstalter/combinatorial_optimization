@@ -10,16 +10,30 @@ Implementing Dijkstra's algorithm on different data structures so as to compare 
 
 To best test the algorithm's implementation, it will run on lots of graphs, randomly generated. Speed doesn't matter as much for these graphs, so they'll be computed in `Python`, using `numpy`.
 
-To compute `n` graphs of `m` nodes, type:
+On Unix: To compute `n` graphs of `m` nodes, type:
 
 	python random_graphs.py n m | tr '[' '{' | tr ']' '}' | tr '@' '[' | tr '%' ']' > test_graphs.hpp
 
-The graphs will be stored in the file `graphs.txt` in such a form that is easily readable by `C++` code.
+On Windows (or if you don't like pipes) run that instead:
 
-__Remark:__ The pipes after the python call require a Unix system. On Windows, find another way to change the '[]' into '{}'.
+	python no_unix.py n m
+
+The graphs will be stored in the file `test_graphs.hpp`, directly readable `C++` code. Then, run
+
+### Running Dijkstra
+
+Once random graphs are generated, run:
+
+	make
+
+And finally
+
+	./main a b
+
+Will output the result of running Dijkstra on graph n°`a` starting from vertex `b`. Make sure that `a<n` and `b<m`.
 
 Here is an example of graph generator use:
 
 ![timing python](ressources/capture.png)
 
-So generating 100 graphs of 400 nodes (and 48K edges) took me 20s. Since Dijkstra will be longer to run (on all 100 graphs), it's no big deal to use `Python` here.
+So generating 100 graphs of 400 nodes (and 48K edges) took about 25s using full `Python` and 40s with `Python` and `bash` (that needs be optimized...).
