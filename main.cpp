@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "Graph.h"
+#include "BinaryHeap.h"
 #include "test_graphs.hpp"
 
 template <typename T>
