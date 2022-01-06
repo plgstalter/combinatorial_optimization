@@ -15,13 +15,13 @@ def file_writer(number_of_graphs, size_nodes, density=.3, max_weight=500, file_n
         file.write(string + "{\n")
         for i in range(size_nodes):
             string2 = str(list(start[(end == i) & (start != end)])).replace('[', '{').replace(']', '}')
-            file.write(string2 + "\n")
+            file.write(string2 + ",\n")
         file.write('};\n')
         string3 = f"std::vector< std::vector<int> > weights{j}="
         file.write(string3 + "{\n")
         for i in range(size_nodes):
             string4 = str(list(Weights[j][(end == i) & (start != end)])).replace('[', '{').replace(']', '}')
-            file.write(string4 + "\n")
+            file.write(string4 + ",\n")
         file.write('};\n')
     string5 = f"std::vector< std::vector<int> >* arcs[{number_of_graphs}]="
     file.write(string5 + "{\n")
