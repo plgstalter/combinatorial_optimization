@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -g -Wall -std=c++17
 
-main: main.o Graph.o
+main: main.o Graph.o BinaryHeap.o
 	$(CC) -o main *.o
 
 main.o: main.cpp Graph.h BinaryHeap.h test_graphs.hpp
@@ -13,5 +13,5 @@ Graph.o: Graph.cpp
 BinaryHeap.o: BinaryHeap.cpp
 	$(CC) $(CFLAGS) -c BinaryHeap.cpp
 
-clean: main.o Graph.o BinaryHeap.o
+clean: Graph.o BinaryHeap.o main.o  
 	rm *.o
