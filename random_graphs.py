@@ -18,7 +18,7 @@ def decode_graph(Arcs, Weights, size_nodes, number_of_graphs):
     '''
     put graph in proper arcs form
     '''
-    print('#include <vector>\n\nclass test_graphs {\npublic:')
+    print('//This file was compiled by random_graphs.py and bash.\n//Its content is composed of randomly generated graphs.\n\n#include <vector>\n\nclass test_graphs {\npublic:')
     for j in range(len(Arcs)):
         start = Arcs[j]//size_nodes
         end = Arcs[j]%size_nodes
