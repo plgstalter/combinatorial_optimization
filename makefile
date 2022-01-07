@@ -1,20 +1,28 @@
-CC = g++
-CFLAGS = -g -Wall -std=c++17
+CC=g++
+CFLAGS= -std=c++17 -Wall -ggdb -Iinclude
 
-main: main.o Graph.o BinaryHeap.o std_graph.o
-	$(CC) -o main *.o
+src := $(wildcard src/*.cpp)
+obj := $(subst src, build, $(src:.cpp=.o))
 
-main.o: main.cpp Graph.h BinaryHeap.h std_graph.h test_graphs.hpp
-	$(CC) $(CFLAGS) -c main.cpp
+.PHONY: directories
 
-Graph.o: Graph.cpp
-	$(CC) $(CFLAGS) -c Graph.cpp
+all: directories project
+	@echo $(obj)
 
-BinaryHeap.o: BinaryHeap.cpp
-	$(CC) $(CFLAGS) -c BinaryHeap.cpp
+project: main.o build
+	$(CC) $(CFLAGS) -o project main.o build/*.o
+ 
+main.o: main.cpp $(obj)
+	$(CC) $(CFLAGS) -c main.cpp include/*.h*
 
-std_graph.o: std_graph.cpp
-	$(CC) $(CFLAGS) -c std_graph.cpp
+build/%.o: src/%.cpp include/%.h
+	$(CC) $(CFLAGS) -o $@ -c $<
 
-clean: Graph.o BinaryHeap.o main.o std_graph.o 
-	rm *.o
+directories: build
+build:
+	mkdir -p $@
+
+clean:
+	rm -r build
+	rm main.o
+	rm include/*.gch
