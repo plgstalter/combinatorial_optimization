@@ -1,5 +1,7 @@
 #include <math.h>
+#include <numeric>
 #include <iostream>
+#include <vector>
 
 int array_sum(int* array) {
  	int res = 0;
@@ -12,29 +14,40 @@ int array_sum(int* array) {
 class std_graph {
 	private:
 		int big_integer = 10000;
-	public:
-		int size_graph;
-		std_graph(int Size, int* Arcs, int* Weights);
-		int* arcs;
-		int* weights;
-		int* predecessors;
-		int* distances;
-		int* P;
-		void Dijkstra(int start);
+		std::vector<int> P;
+		std::vector<int> distances;
 		int min_dist();
 		void update_distances(int k, int l);
+	public:
+		int size_graph;
+		std_graph(int Size, std::vector<int> Arcs, std::vector<int> Weights);	
+		std::vector<int> arcs;
+		std::vector<int> weights;
+		std::vector<int> predecessors;
+		void display_graph();
+		void Dijkstra(int start);
 };
 
-std_graph::std_graph(int Size, int* Arcs, int* Weights) {
+std_graph::std_graph(int Size, std::vector<int> Arcs, std::vector<int> Weights) {
 	size_graph = Size;
-	int* arcs = Arcs;
-	int* weights = Weights;
-	int* predecessors[size_graph];
-	int* distances[size_graph];
-	int* P[size_graph];
+	arcs       = Arcs;
+	weights    = Weights;
+	for (int i=0; i<size_graph*size_graph; i++) {
+		if (weights[i] == 0) {
+			weights[i] = big_integer/2;
+		}
+	}
+	predecessors.assign(size_graph, 0);
+	P.assign(size_graph, 1);
+	distances.assign(size_graph, big_integer);
+	}
+
+void std_graph::display_graph() {
 	for (int i=0; i<size_graph; i++) {
-		*distances[i] = big_integer;
-		*P[i] = 1;
+		for (int j=0; i<size_graph; j++) {
+			std::cout << arcs[i*size_graph + j] << " ";
+		}
+		std::cout << "\n";
 	}
 }
 
@@ -44,11 +57,11 @@ void std_graph::Dijkstra(int start) {
 	}
 	distances[start] = 0;
 	predecessors[start] = -1;
-	while (array_sum(P) != 0) {
+	while (std::accumulate(P.begin(), P.end(), 0) != 0) {
 		int a = min_dist();
 		P[a] = 0;
-		for (int i=0; i<floor(size_graph/2); i++) {
-			if (arcs[a * size_graph + i] == 1 and P[i] == 0) {
+		for (int i=0; i<size_graph; i++) {
+			if (arcs[a * size_graph + i] == 1 ) {
 				update_distances(a, i);
 			}
 		}
@@ -56,10 +69,18 @@ void std_graph::Dijkstra(int start) {
 }
 
 int std_graph::min_dist() {
+	for (int i=0; i<size_graph; i++) {
+		std::cout << P[i] << " ";
+	}
+	std::cout << "    ";
+	for (int i=0; i<size_graph; i++) {
+		std::cout << distances[i] << " ";
+	}
+	std::cout << "\n";
 	int mini = big_integer;
 	int node = -1;
 	for (int i=0; i<size_graph; i++) {
-		if ( P[i] == 1 && distances[i] < mini) {
+		if (P[i] == 1 && distances[i] < mini) {
 			mini = distances[i];
 			node = i;
 		}

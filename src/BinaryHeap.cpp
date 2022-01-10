@@ -5,6 +5,7 @@ class BinaryHeap {
 	public:
 		int size;
 		int L = 0;
+		int res[2];
 		BinaryHeap(int n);
 		void Heap_builder(int* V[]);
 		int left(int i);
@@ -55,13 +56,13 @@ void BinaryHeap::insert(int i, int v){
 }
 
 int* BinaryHeap::extract_min() {
-	int i = *Heap[0];
-	int v = *Heap[size + 0];
-	int  res[2] = {i, v};
-	*Heap[i] = -1;
+	res[0] = *Heap[0];
+       	res[1] = *Heap[size + 0];
+	int *pres = res;
+	*Heap[ *pres ] = -1;
 	L--;
 	move_down(0);
-	return res;
+	return pres;
 }
 
 void BinaryHeap::decrease_key(int i, int v) {
