@@ -12,13 +12,11 @@ To best test the algorithm's implementation, it will run on lots of graphs, rand
 
 On Unix: To compute `n` graphs of `m` nodes, type:
 
-	python random_graphs.py n m | tr '[' '{' | tr ']' '}' | tr '@' '[' | tr '%' ']' > test_graphs.hpp
+	python fast_generators n m graph
 
-On Windows (or if you don't like pipes) run that instead:
+The graphs will be stored in the file `include/test_graphs.hpp`, directly readable `C++` code. Then, run
 
-	python no_unix.py n m
-
-The graphs will be stored in the file `test_graphs.hpp`, directly readable `C++` code. Then, run
+It can also creates files for other data structures (`std_graph` and `fibo` (fibonnaci Heaps)). Though Dijkstra has not yet been implemented for these structures ... stay tuned 😊.
 
 ### Running Dijkstra
 
@@ -36,4 +34,4 @@ Here is an example of graph generator use:
 
 ![timing python](ressources/capture.png)
 
-So generating 100 graphs of 400 nodes (and 48K edges) took about 25s using full `Python` and 40s with `Python` and `bash` (that needs be optimized...).
+Less than 2 seconds for creating a file with 50 instances of graphs composed of 200 nodes.
