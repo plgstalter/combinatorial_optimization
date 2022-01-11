@@ -39,7 +39,7 @@ class Graph_gen():
 
         file = open(file_name, 'w')
 
-        file.write('//This file was compiled by no_unix.py.\n//It contains randomly generated graphs.\n\n#include <vector>\n\nclass test_graphs {\npublic:')
+        file.write('//This file was compiled by fast_generator.py.\n//It contains randomly generated graphs.\n\n#include <vector>\n\nclass test_graphs {\npublic:\n')
         for j in range(len(Arcs)):
             start = Arcs[j]//self.size_graphs
             end = Arcs[j]%self.size_graphs
@@ -69,27 +69,27 @@ class Graph_gen():
     def fibo_heap_printer(self, file_name="include/test_fibo.hpp"):
         pass
 
-    def std_graph_printer(self, file_name="include/test_std_graph.hpp"):
+    def std_graph_printer(self, file_name="include/test_std_graphs.hpp"):
         file = open(file_name, 'w')
 
-        file.write('//This file was compiled by no_unix.py.\n//It contains randomly generated graphs.\n\n#include <vector>\n\nclass test_graphs {\npublic:\n')
+        file.write('//This file was compiled by fast_generator.py.\n//It contains randomly generated graphs.\n\n#include <vector>\n\nclass test_std_graphs {\npublic:\n')
         for j in range(len(self.arcs)):
-            string = f"int arcs{j}[{self.size_graphs**2}]=" 
+            string = f"std::vector<int> arcs{j}=" 
             file.write(string + "{\n")
             for i in range(self.size_graphs):
                 string2 = str(list(self.arcs[j][i])).replace('[', '').replace(']', '')
                 file.write(string2 + ",\n")
-            string3 = f"int weights{j}[{self.size_graphs**2}]="
+            string3 = f"std::vector<int> weights{j}="
             file.write("};\n" + string3 + "{\n")
             for i in range(self.size_graphs):
                 string4 = str(list(self.weights[j][i])).replace('[', '').replace(']', '')
                 file.write(string4 + ",\n")
-        string5 = f"int[{self.size_graphs**2}]* arcs[{self.nb_graphs}]="
+        string5 = f"std::vector<int>* arcs[{self.nb_graphs}]="
         file.write("};\n" + string5 + "{\n")
         for i in range(len(self.arcs)):
             string6 = f"&arcs{i},\n"
             file.write(string6)
-        string7 = f"int[{self.size_graphs**2}]* weights[{self.nb_graphs}]="
+        string7 = f"std::vector<int>* weights[{self.nb_graphs}]="
         file.write("};\n" + string7 + "{\n")
         for i in range(len(self.arcs)):
             string8 = f"&weights{i},\n"
