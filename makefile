@@ -13,7 +13,7 @@ project: main.o build
 	$(CC) $(CFLAGS) -o project main.o build/*.o
  
 main.o: main.cpp $(obj)
-	$(CC) $(CFLAGS) -c main.cpp include/*.h*
+	$(CC) $(CFLAGS) -c main.cpp 
 
 build/%.o: src/%.cpp include/%.h
 	$(CC) $(CFLAGS) -o $@ -c $<

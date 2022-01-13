@@ -1,4 +1,5 @@
 #include <math.h>
+#include <array>
 #include <numeric>
 #include <iostream>
 #include <vector>
@@ -20,7 +21,7 @@ class std_graph {
 		void update_distances(int k, int l);
 	public:
 		int size_graph;
-		std_graph(int Size, std::vector<int> Arcs, std::vector<int> Weights);	
+		std_graph(std::vector<int> Arcs, std::vector<int> Weights);	
 		std::vector<int> arcs;
 		std::vector<int> weights;
 		std::vector<int> predecessors;
@@ -28,8 +29,8 @@ class std_graph {
 		void Dijkstra(int start);
 };
 
-std_graph::std_graph(int Size, std::vector<int> Arcs, std::vector<int> Weights) {
-	size_graph = Size;
+std_graph::std_graph(std::vector<int> Arcs, std::vector<int> Weights) {
+	size_graph = sqrt(size(Arcs));
 	arcs       = Arcs;
 	weights    = Weights;
 	for (int i=0; i<size_graph*size_graph; i++) {
@@ -43,12 +44,13 @@ std_graph::std_graph(int Size, std::vector<int> Arcs, std::vector<int> Weights) 
 	}
 
 void std_graph::display_graph() {
-	for (int i=0; i<size_graph; i++) {
-		for (int j=0; i<size_graph; j++) {
-			std::cout << arcs[i*size_graph + j] << " ";
+	for (int i=0; i<size(arcs); i++) {
+		if (i%size_graph == 0) {
+			std::cout << "\n";
 		}
-		std::cout << "\n";
+		std::cout << arcs[i] << " ";
 	}
+	std::cout << "\n\n";
 }
 
 void std_graph::Dijkstra(int start) {
@@ -69,15 +71,7 @@ void std_graph::Dijkstra(int start) {
 }
 
 int std_graph::min_dist() {
-	for (int i=0; i<size_graph; i++) {
-		std::cout << P[i] << " ";
-	}
-	std::cout << "    ";
-	for (int i=0; i<size_graph; i++) {
-		std::cout << distances[i] << " ";
-	}
-	std::cout << "\n";
-	int mini = big_integer;
+	int mini = 2 * big_integer;
 	int node = -1;
 	for (int i=0; i<size_graph; i++) {
 		if (P[i] == 1 && distances[i] < mini) {
