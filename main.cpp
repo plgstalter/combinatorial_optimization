@@ -56,8 +56,7 @@ int main(int argc, char const *argv[]) {
 	test_std_graphs teste2;
 	int Size = size(*teste2.arcs[0]);
 	std_graph TestGraph(*teste2.arcs[0], *teste2.weights[0]);
-	TestGraph.Dijkstra(0); // not working YET
-	TestGraph.display_graph();
+	TestGraph.Dijkstra(0);
 	vector_printer(TestGraph.predecessors);
 	return 0;
 }

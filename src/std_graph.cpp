@@ -1,5 +1,4 @@
 #include <math.h>
-#include <array>
 #include <numeric>
 #include <iostream>
 #include <vector>
