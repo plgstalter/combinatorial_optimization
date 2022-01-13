@@ -53,8 +53,9 @@ class Graph_gen():
             for i in range(self.size_graphs):
                 string4 = str(list(Weights[j][(end == i) & (start != end)])).replace('[', '{').replace(']', '}')
                 file.write(string4 + ",\n")
+            file.write("};\n")
         string5 = f"std::vector< std::vector<int> >* arcs[{self.nb_graphs}]="
-        file.write("};\n" + string5 + "{\n")
+        file.write(string5 + "{\n")
         for i in range(len(Arcs)):
             string6 = f"&arcs{i},\n"
             file.write(string6)
@@ -84,8 +85,9 @@ class Graph_gen():
             for i in range(self.size_graphs):
                 string4 = str(list(self.weights[j][i])).replace('[', '').replace(']', '')
                 file.write(string4 + ",\n")
+            file.write("};\n")
         string5 = f"std::vector<int>* arcs[{self.nb_graphs}]="
-        file.write("};\n" + string5 + "{\n")
+        file.write(string5 + "{\n")
         for i in range(len(self.arcs)):
             string6 = f"&arcs{i},\n"
             file.write(string6)

@@ -14,9 +14,11 @@ On Unix: To compute `n` graphs of `m` nodes, type:
 
 	python fast_generators n m graph
 
-The graphs will be stored in the file `include/test_graphs.hpp`, directly readable `C++` code. Then, run
+	python fast_generators n m std
 
-It can also creates files for other data structures (`std_graph` and `fibo` (fibonnaci Heaps)). Though Dijkstra has not yet been implemented for these structures ... stay tuned 😊.
+The graphs will be stored in the file `include/test_graphs.hpp` and `include/test_std_graphs.hpp`, directly readable `C++` code. 
+
+For now, the algorithm runs on these two data structures. Fibonacci heap support is in the books.
 
 ### Running Dijkstra
 
@@ -26,7 +28,7 @@ Once random graphs are generated, run:
 
 And finally
 
-	./main a b
+	./project a b
 
 Will output the result of running Dijkstra on graph n°`a` starting from vertex `b`. Make sure that `a<n` and `b<m`.
 
@@ -35,3 +37,7 @@ Here is an example of graph generator use:
 ![timing python](ressources/capture.png)
 
 Less than 2 seconds for creating a file with 50 instances of graphs composed of 200 nodes.
+
+## ToDo
+
+Implement other algorithms as well as dijkstra's to enrich the project.
