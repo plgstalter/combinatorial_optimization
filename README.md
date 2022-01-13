@@ -49,3 +49,7 @@ Here is the evolution of computational time for Dijkstra's on the structure "Gra
 ![dijkstra_graph](ressources/dijkstra_res_graph.png)
 
 Run on graphs of 10 to 400 nodes, at a given density.
+
+And with different densities of arcs:
+
+![variable_density](ressources/dijkstra_res_graph_density.png)
