@@ -41,3 +41,11 @@ Less than 2 seconds for creating a file with 50 instances of graphs composed of 
 ## ToDo
 
 Implement other algorithms as well as dijkstra's to enrich the project.
+
+### Results
+
+Here is the evolution of computational time for Dijkstra's on the structure "Graph":
+
+![dijkstra_graph](ressources/dijkstra_res_graph.png)
+
+Run on graphs of 10 to 400 nodes, at a given density.
