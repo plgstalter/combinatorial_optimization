@@ -44,6 +44,8 @@ Implement other algorithms as well as dijkstra's to enrich the project.
 
 ### Results
 
+#### Structure `graph`
+
 Here is the evolution of computational time for Dijkstra's on the structure "Graph":
 
 ![dijkstra_graph](ressources/dijkstra_res_graph.png)
@@ -53,3 +55,19 @@ Run on graphs of 10 to 400 nodes, at a given density.
 And with different densities of arcs:
 
 ![variable_density](ressources/dijkstra_res_graph_density.png)
+
+#### Strcture `std_graph`
+
+![std_graph](ressources/dijkstra_density_std_graph.png)
+
+It can be compared to the results obtained with `graph`:
+
+![comparing](ressources/comparing_graph__std_graph.png)
+
+It can be seen that `std_graph` tends to be slower as the number of nodes (and hence arcs) increases. That's probably due to the fact that the algorithm is very similar, but the data structure is larger when the density is big.
+
+Indeed, let's compare the size of the files containing `graph` and `std_graph` at two different densities:
+
+![comparing_size](ressources/spatial_comp.png)
+
+As expected, the files are very similar when the density is high. `std_graph` always has the same size and is hence more relevant for __high densities__. On the contrary, when the density is low, `std_graph` contains lots of zeros, whereas `graph` only keeps the __relevant__ information. That's why `std_graph` takes up twice as much space on low densities.
