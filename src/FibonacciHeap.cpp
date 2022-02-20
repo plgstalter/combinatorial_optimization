@@ -15,12 +15,12 @@ struct node {
 class FibonacciHeap {
 	
 	private:
+		void consolidate(node*);
+		void link(node*, node*, node*);
+	public:
 		int number;
 		node* HH;
-		void consolidate(node*);
-	public:
 		FibonacciHeap();
-		void link(node*, node*, node*);
 		node* createNode(int);
 		node* insert(node*, node *);
 		node* extractMin(node *);
@@ -74,7 +74,7 @@ node* FibonacciHeap::extractMin(node* H) {
 	p = z;
 	ptr = z;
 	node* x = z->child;
-	node* np;
+	node* np=nullptr;
 	if (x != NULL) {
 		ptr = x;
 		while (np != ptr) {
@@ -205,7 +205,7 @@ void FibonacciHeap::cut(node* H, node* x, node* y) {
 	x->mark = 'F';
 }
 
-void FibonacciHeap::cascade_cut(node* a, node* b) {
+void FibonacciHeap::cascade_cut(node* a, node* b) {
 	node* z = b->parent;
 	if (z != NULL) {
 		if (b->mark == 'F') {

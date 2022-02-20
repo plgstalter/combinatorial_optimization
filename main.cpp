@@ -7,6 +7,7 @@
 #include "BinaryHeap.h"
 #include "std_graph.h"
 #include "FibonacciHeap.h"
+#include "dijkstra.h"
 
 // example files to test dijkstra
 #include "test_graphs.hpp"
@@ -84,6 +85,6 @@ int main(int argc, char const *argv[]) {
 	//}
  	//fibonacci heaps implementation testing
 	std::cout << "This is the testing of the implementation with data structure 'FibonacciHeap'.\n\n";
-	//todo
+	FibonacciHeap fibo_test;
 	return 0;
 }

@@ -6,6 +6,7 @@ class BinaryHeap {
 	public:
 		int size;
 		int L = 0;
+		int res[2];
 		BinaryHeap(int n);
 		void Heap_builder(int* V[]);
 		int left(int i);

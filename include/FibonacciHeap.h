@@ -17,10 +17,10 @@ class FibonacciHeap {
             
         private:
                 int number;
-                node* HH; 
                 void consolidate(node*);
         public:
                 FibonacciHeap();
+                node* HH; 
                 int link(node*, node*, node*);
                 node* createNode(int);
                 node* insert(node*, node *); 
