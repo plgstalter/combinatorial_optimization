@@ -26,7 +26,7 @@ class Graph_gen():
         elif  choice == "std":
             self.std_graph_printer()
 
-    def graph_printer(self, file_name="include/test_graphs.hpp"):
+    def graph_printer(self, file_name="dijsktra/include/test_graphs.hpp"):
         Arcs = []
         bis_size = int(self.density * self.size_graphs **2)
         arcs_array = np.arange(self.size_graphs**2)
