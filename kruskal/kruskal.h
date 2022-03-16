@@ -3,21 +3,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+struct vertex {
+	struct vertex* parent;
+};
+
 struct edge {
-	int left;
-	int right;
+	struct vertex* left;
+	struct vertex* right;
 	int weight;
 };
 
 struct Graph {
-	int vertices;
+	int number_of_vertices;
 	int number_of_edges;
 	struct edge* edges;
 	struct edge* covering_tree;
 };
 
-void create_set(int);
-void unite(int*, int*);
-int find(int*);
+void create_set(struct vertex*);
+struct vertex* find(struct vertex*);
+void unite(struct vertex*, struct vertex*);
 int* quicksort_method(struct Graph, int, int);
 void kruskal(struct Graph);

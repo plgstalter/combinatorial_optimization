@@ -2,29 +2,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+struct vertex {
+	struct vertex* parent;
+};
+
 struct edge {
-	int left;
-	int right;
+	struct vertex* left;
+	struct vertex* right;
 	int weight;
 };
 
 struct Graph {
-	int vertices;
+	int number_of_vertices;
 	int number_of_edges;
 	struct edge* edges;
 	struct edge* covering_tree;
 };
 
-void create_set(int vertex) {
-	printf("%s", "aha");
+void create_set(struct vertex* x) {
+	x->parent = NULL;
 }
 
-void unite(int* left, int* right) {
-	printf("%s", "ehe");
+struct vertex* find(struct vertex* x) {
+	if (x->parent == NULL) {
+		return x;
+	}
+	return find(x->parent);
 }
 
-int find(int* vertex) {
-	return 0;
+void unite(struct vertex* x, struct vertex* y) {
+	struct vertex* x_root = find(x);
+	struct vertex* y_root = find(y);
+	if (x_root != y_root) {
+		x_root->parent = y_root;
+	}
 }
 
 void quicksort_method(struct Graph graph, int low, int high) {
@@ -57,15 +68,16 @@ void quicksort_method(struct Graph graph, int low, int high) {
 
 void kruskal(struct Graph graph) {
 	int count = 0;
-	for (int i=0; i<graph.vertices; i++) {
-		create_set(i);
+	struct vertex* vertices[graph.number_of_vertices];
+	for (int i=0; i<graph.number_of_vertices; i++) {
+		create_set(vertices[i]);
 	}
 	quicksort_method(graph, 0, graph.number_of_edges - 1);
 	for (int i=0; i<graph.number_of_edges; i++) {
-		if (find(&graph.edges[i].left) != find(&graph.edges[i].right)) {
+		if (find(graph.edges[i].left) != find(graph.edges[i].right)) {
 			graph.covering_tree[count] = graph.edges[i];
 			count++;
-			unite(&(&graph.edges[i])->left, &(&graph.edges[i])->right);
+			unite((graph.edges[i]).left, (graph.edges[i]).right);
 		}
 	}
 }
