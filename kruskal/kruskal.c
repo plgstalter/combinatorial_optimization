@@ -66,7 +66,7 @@ void quicksort_method(struct Graph graph, int low, int high) {
 	}
 }
 
-void kruskal(struct Graph graph) {
+int kruskal(struct Graph graph) {
 	int count = 0;
 	struct vertex* vertices[graph.number_of_vertices];
 	for (int i=0; i<graph.number_of_vertices; i++) {
@@ -80,4 +80,5 @@ void kruskal(struct Graph graph) {
 			unite((graph.edges[i]).left, (graph.edges[i]).right);
 		}
 	}
+	return count;
 }

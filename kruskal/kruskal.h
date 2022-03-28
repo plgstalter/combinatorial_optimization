@@ -24,4 +24,4 @@ void create_set(struct vertex*);
 struct vertex* find(struct vertex*);
 void unite(struct vertex*, struct vertex*);
 int* quicksort_method(struct Graph, int, int);
-void kruskal(struct Graph);
+int kruskal(struct Graph);

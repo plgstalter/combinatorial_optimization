@@ -99,7 +99,9 @@ class Graph_gen():
         file.write('};\n};\n')
         file.close()
 
-if  len(argv) == 5:
+if  len(argv) == 6:
+    Instance = Graph_gen(int(argv[1]), int(argv[2]), density=float(argv[4]))
+elif  len(argv) == 5:
     Instance = Graph_gen(int(argv[1]), int(argv[2]), density=float(argv[4]))
 elif len(argv) == 4:
     Instance = Graph_gen(int(argv[1]), int(argv[2]))
