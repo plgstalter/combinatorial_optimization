@@ -15,9 +15,17 @@ struct edge {
 struct Graph {
 	int number_of_vertices;
 	int number_of_edges;
-	struct edge* edges;
 	struct edge* covering_tree;
+	struct edge edges[];
 };
+
+struct Graph* createGraph(struct Graph* s, int size_vertices, int size_edges) {
+    s = malloc(sizeof(*s) * (size_vertices + size_edges));
+    s->number_of_vertices = size_vertices;
+    s->number_of_edges = size_edges;
+ 
+    return s;
+}
 
 void create_set(struct vertex* x) {
 	x->parent = NULL;
@@ -66,18 +74,18 @@ void quicksort_method(struct Graph graph, int low, int high) {
 	}
 }
 
-int kruskal(struct Graph graph) {
+int kruskal(struct Graph *graph) {
 	int count = 0;
-	struct vertex* vertices[graph.number_of_vertices];
-	for (int i=0; i<graph.number_of_vertices; i++) {
+	struct vertex* vertices[graph->number_of_vertices];
+	for (int i=0; i<graph->number_of_vertices; i++) {
 		create_set(vertices[i]);
 	}
-	quicksort_method(graph, 0, graph.number_of_edges - 1);
-	for (int i=0; i<graph.number_of_edges; i++) {
-		if (find(graph.edges[i].left) != find(graph.edges[i].right)) {
-			graph.covering_tree[count] = graph.edges[i];
+	quicksort_method(*graph, 0, graph->number_of_edges - 1);
+	for (int i=0; i<graph->number_of_edges; i++) {
+		if (find(graph->edges[i].left) != find(graph->edges[i].right)) {
+			graph->covering_tree[count] = graph->edges[i];
 			count++;
-			unite((graph.edges[i]).left, (graph.edges[i]).right);
+			unite((graph->edges[i]).left, (graph->edges[i]).right);
 		}
 	}
 	return count;
