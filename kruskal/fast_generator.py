@@ -18,15 +18,7 @@ class Graph_gen():
         weights = (self.max_weight* np.random.rand(self.size_graphs**2 * self.nb_graphs)).reshape((self.nb_graphs, self.size_graphs, self.size_graphs)).astype(int)
         self.weights = weights * arcs
 
-    def printer_switch(self, choice):
-        if  choice == "graph":
-            self.graph_printer()
-        elif  choice == "fibo":
-            self.fibo_heap_printer()
-        elif  choice == "std":
-            self.std_graph_printer()
-
-    def graph_printer(self, file_name="test_graphs.hpp"):
+    def graph_printer(self, file_name="test_graphs.txt"):
         Arcs = []
         bis_size = int(self.density * self.size_graphs **2)
         arcs_array = np.arange(self.size_graphs**2)
@@ -39,48 +31,45 @@ class Graph_gen():
 
         file = open(file_name, 'w')
 
-        file.write('//This file was compiled by fast_generator.py.\n//It contains randomly generated graphs.\n\n#include <vector>\n\nclass test_graphs {\npublic:\n')
+        file.write('//This file was compiled by fast_generator.py.\n//It contains randomly generated graphs.\n\n')
         for j in range(len(Arcs)):
             start = Arcs[j]//self.size_graphs
             end = Arcs[j]%self.size_graphs
-            string = f"std::vector< std::vector<int> > arcs{j}=" 
+            string = f"int* arcs{j}=" 
             file.write(string + "{\n")
             for i in range(self.size_graphs):
                 string2 = str(list(start[(end == i) & (start != end)])).replace('[', '{').replace(']', '}')
                 file.write(string2 + ",\n")
-            string3 = f"std::vector< std::vector<int> > weights{j}="
+            string3 = f"int* weights{j}="
             file.write("};\n" + string3 + "{\n")
             for i in range(self.size_graphs):
                 string4 = str(list(Weights[j][(end == i) & (start != end)])).replace('[', '{').replace(']', '}')
                 file.write(string4 + ",\n")
             file.write("};\n")
-        string5 = f"std::vector< std::vector<int> >* arcs[{self.nb_graphs}]="
+        string5 = f"int* arcs[{self.nb_graphs}]="
         file.write(string5 + "{\n")
         for i in range(len(Arcs)):
             string6 = f"&arcs{i},\n"
             file.write(string6)
-        string7 = f"std::vector< std::vector<int> >* weights[{self.nb_graphs}]="
-        file.write("};\n" + string7 + "{\n")
+        #string7 = f"std::vector< std::vector<int> >* weights[{self.nb_graphs}]="
+        #file.write("};\n" + string7 + "{\n")
         for i in range(len(Arcs)):
             string8 = f"&weights{i},\n"
             file.write(string8)
         file.write('};\n};\n')
         file.close()
 
-    def fibo_heap_printer(self, file_name="include/test_fibo.hpp"):
-        pass
-
-    def std_graph_printer(self, file_name="include/test_std_graphs.hpp"):
+    def std_graph_printer(self, file_name="test_std_graphs.txt"):
         file = open(file_name, 'w')
 
-        file.write('//This file was compiled by fast_generator.py.\n//It contains randomly generated graphs.\n\n#include <vector>\n\nclass test_std_graphs {\npublic:\n')
+        file.write('//This file was compiled by fast_generator.py.\n//It contains randomly generated graphs.\n\n')
         for j in range(len(self.arcs)):
-            string = f"std::vector<int> arcs{j}=" 
+            string = f"struct Graph* graphe{j};" 
             file.write(string + "{\n")
             for i in range(self.size_graphs):
                 string2 = str(list(self.arcs[j][i])).replace('[', '').replace(']', '')
                 file.write(string2 + ",\n")
-            string3 = f"std::vector<int> weights{j}="
+            string3 = f" weights{j}="
             file.write("};\n" + string3 + "{\n")
             for i in range(self.size_graphs):
                 string4 = str(list(self.weights[j][i])).replace('[', '').replace(']', '')
@@ -106,4 +95,4 @@ elif  len(argv) == 5:
 elif len(argv) == 4:
     Instance = Graph_gen(int(argv[1]), int(argv[2]))
 Instance.generator()
-Instance.printer_switch(argv[3])
+Instance.std_graph_printer();
